@@ -1,2 +1,15 @@
 .idea
 venv/
+
+# vars and credencials
+cloudrec/terraform/terraform.tfvars
+
+# terraform
+/cloudrec/terraform/.terraform.lock.hcl
+/cloudrec/terraform/.terraform/
+/cloudrec/terraform/terraform.tfstate
+/cloudrec/terraform/terraform.tfstate.backup
+
+# function
+/cloudrec/terraform/modules/cloud_functions/function_export/env/
+/cloudrec/terraform/modules/cloud_functions/function_export/function.zip
