@@ -2,7 +2,15 @@
 resource "google_logging_project_sink" "project_sink" {
   name                   = var.google_logging_project_sink_name
   destination            = "pubsub.googleapis.com/${var.log_topic_id}"
-  filter                 = "resource.type=\"gcs_bucket\" AND protoPayload.methodName=\"storage.buckets.create\""
+  filter                 = <<EOF
+    (
+      resource.type="gcs_bucket" AND
+      protoPayload.methodName="storage.buckets.create"
+    ) OR (
+      resource.type="cloud_function" AND
+      protoPayload.methodName="google.cloud.functions.v1.CloudFunctionsService.CreateFunction"
+    )
+    EOF
   unique_writer_identity = true
 }
 

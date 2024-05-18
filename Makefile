@@ -13,6 +13,11 @@ create-zip-function:
 	env\Scripts\activate
 	pip install -r requirements.txt
 	7z a function.zip *
+	cd ../../../../..
 
 create-config:
 	@copy cloudrec/terraform/credencials.tfvars.example cloudrec/terraform/credencials.tfvars
+
+pip-install:
+	pip install -r requirements.txt
+	pip install -r cloudrec/terraform/modules/cloud_functions/function_export/requirements.txt
