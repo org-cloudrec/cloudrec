@@ -1,4 +1,4 @@
-from google.cloud import storage, functions_v1
+from google.cloud import storage, functions_v1, pubsub_v1
 import base64
 import json
 import os
@@ -22,6 +22,9 @@ def generate_terraform_file(event, context):
         elif resource_type == 'cloud_function':
             function_name, function_details = describe_function(resource_name)
             create_function_tf(function_name, function_details, resource_type)
+        elif resource_type == 'pubsub_topic':
+            topic_name, topic_details = describe_pubsub_topic(resource_name)
+            create_pubsub_topic_tf(topic_name, topic_details, resource_type)
         else:
             print(f"Unsupported resource type: {resource_type}")
 
@@ -56,6 +59,15 @@ def describe_function(resource_name):
     return function_name, function
 
 
+def describe_pubsub_topic(resource_name):
+    """Retrieve details about a Pub/Sub topic using the resource name from protoPayload."""
+    publisher = pubsub_v1.PublisherClient()
+    topic = publisher.get_topic(topic=resource_name)
+    parts = resource_name.split('/')
+    topic_name = parts[3]
+    return topic_name, topic
+
+
 def create_bucket_tf(name, properties, resource_type):
     try:
         file_content = f"""
@@ -87,6 +99,18 @@ resource "google_cloudfunctions_function" "{name}" {{
         write_tf_file(name, resource_type, file_content)
     except Exception as e:
         print(f"Error creating bucket: {e}")
+
+
+def create_pubsub_topic_tf(name, properties, resource_type):
+    try:
+        file_content = f"""
+resource "google_pubsub_topic" "{name}" {{
+  name = "{properties.name}"
+}}
+"""
+        write_tf_file(name, resource_type, file_content)
+    except Exception as e:
+        print(f"Error creating Pub/Sub topic Terraform file: {e}")
 
 
 def write_tf_file(name, resource, content):

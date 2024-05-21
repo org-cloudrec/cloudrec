@@ -1,0 +1,28 @@
+{
+  "insertId": "-iv2sqhd1zlk",
+  "logName": "projects/prj-thalesgibbon-56789/logs/cloudaudit.googleapis.com%2Factivity",
+  "operation": {
+    "id": "operations/cHJqLXRoYWxlc2dpYmJvbi01Njc4OS91cy1jZW50cmFsMS9jbG91ZHJlYy1mdW5jdGlvbi1leHBvcnQtbG9nZ2luZy85cGdSZGFDUFVUNA",
+    "last": true,
+    "producer": "cloudfunctions.googleapis.com"
+  },
+  "protoPayload": {
+    "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+    "authenticationInfo": {},
+    "methodName": "google.cloud.functions.v1.CloudFunctionsService.CreateFunction",
+    "resourceName": "projects/prj-thalesgibbon-56789/locations/us-central1/functions/cloudrec-function-export-logging",
+    "serviceName": "cloudfunctions.googleapis.com",
+    "status": {}
+  },
+  "receiveTimestamp": "2024-05-17T05:29:45.492852895Z",
+  "resource": {
+    "labels": {
+      "function_name": "cloudrec-function-export-logging",
+      "project_id": "prj-thalesgibbon-56789",
+      "region": "us-central1"
+    },
+    "type": "cloud_function"
+  },
+  "severity": "NOTICE",
+  "timestamp": "2024-05-17T05:29:45.132985Z"
+}

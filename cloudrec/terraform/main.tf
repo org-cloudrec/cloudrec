@@ -8,7 +8,7 @@ provider "google" {
 locals {
   log_topic_name = "cloudrec-topic-creation-logs"
   google_logging_project_sink_name = "bucket-creation-sink"
-  google_cloudfunctions_function_name = "cloudrec-function-export-logging"
+  google_cloudfunctions_function_name = "cloudrec-function-export-logging-test"
   cloudrec_bucket = "cloudrec-bucket-${var.project_id}"
 }
 

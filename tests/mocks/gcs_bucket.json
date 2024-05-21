@@ -1,0 +1,107 @@
+{
+  "insertId": "12arsi5ek9198",
+  "logName": "projects/prj-thalesgibbon-56789/logs/cloudaudit.googleapis.com%2Factivity",
+  "protoPayload": {
+    "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+    "authenticationInfo": {
+      "principalEmail": "hi@thalesgibbon.com"
+    },
+    "authorizationInfo": [
+      {
+        "granted": true,
+        "permission": "storage.buckets.create",
+        "resource": "projects/_/buckets/testeas56d156as1d56as1d56as1d6",
+        "resourceAttributes": {}
+      }
+    ],
+    "metadata": {
+      "rpo": "DEFAULT"
+    },
+    "methodName": "storage.buckets.create",
+    "request": {
+      "defaultObjectAcl": {
+        "@type": "type.googleapis.com/google.iam.v1.Policy",
+        "bindings": [
+          {
+            "members": [
+              "projectViewer:prj-thalesgibbon-56789"
+            ],
+            "role": "roles/storage.legacyObjectReader"
+          },
+          {
+            "members": [
+              "projectOwner:prj-thalesgibbon-56789",
+              "projectEditor:prj-thalesgibbon-56789"
+            ],
+            "role": "roles/storage.legacyObjectOwner"
+          }
+        ]
+      }
+    },
+    "requestMetadata": {
+      "callerIp": "2804:1b3:a581:1bf4:1c8:5bda:7677:1344",
+      "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+      "destinationAttributes": {},
+      "requestAttributes": {
+        "auth": {},
+        "time": "2024-05-17T16:24:39.577190263Z"
+      }
+    },
+    "resourceLocation": {
+      "currentLocations": [
+        "us"
+      ]
+    },
+    "resourceName": "projects/_/buckets/testeas56d156as1d56as1d56as1d6",
+    "serviceData": {
+      "@type": "type.googleapis.com/google.iam.v1.logging.AuditData",
+      "policyDelta": {
+        "bindingDeltas": [
+          {
+            "action": "ADD",
+            "member": "projectEditor:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyBucketOwner"
+          },
+          {
+            "action": "ADD",
+            "member": "projectOwner:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyBucketOwner"
+          },
+          {
+            "action": "ADD",
+            "member": "projectViewer:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyBucketReader"
+          },
+          {
+            "action": "ADD",
+            "member": "projectEditor:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyObjectOwner"
+          },
+          {
+            "action": "ADD",
+            "member": "projectOwner:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyObjectOwner"
+          },
+          {
+            "action": "ADD",
+            "member": "projectViewer:prj-thalesgibbon-56789",
+            "role": "roles/storage.legacyObjectReader"
+          }
+        ]
+      }
+    },
+    "serviceName": "storage.googleapis.com",
+    "status": {}
+  },
+  "receiveTimestamp": "2024-05-17T16:24:40.954023756Z",
+  "resource": {
+    "labels": {
+      "bucket_name": "testeas56d156as1d56as1d56as1d6",
+      "location": "us",
+      "project_id": "prj-thalesgibbon-56789"
+    },
+    "type": "gcs_bucket"
+  },
+  "severity": "NOTICE",
+  "timestamp": "2024-05-17T16:24:39.568276824Z"
+}

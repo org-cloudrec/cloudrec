@@ -9,6 +9,9 @@ resource "google_logging_project_sink" "project_sink" {
     ) OR (
       resource.type="cloud_function" AND
       protoPayload.methodName="google.cloud.functions.v1.CloudFunctionsService.CreateFunction"
+    ) OR (
+      resource.type="pubsub_topic" AND
+      protoPayload.methodName="google.pubsub.v1.Publisher.CreateTopic"
     )
     EOF
   unique_writer_identity = true

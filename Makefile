@@ -12,6 +12,7 @@ create-zip-function:
 	python -m venv env
 	env\Scripts\activate
 	pip install -r requirements.txt
+	pip freeze > requirements.txt
 	7z a function.zip *
 	cd ../../../../..
 
