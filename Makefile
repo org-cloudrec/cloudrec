@@ -13,7 +13,8 @@ create-zip-function:
 	env\Scripts\activate
 	pip install -r requirements.txt
 	pip freeze > requirements.txt
-	7z a function.zip *
+	rm function.zip
+	7z a -tzip function.zip * -x!function.zip -x!env/ -x!__pycache__/ -aoa
 	cd ../../../../..
 
 create-config:
@@ -22,3 +23,6 @@ create-config:
 pip-install:
 	pip install -r requirements.txt
 	pip install -r cloudrec/terraform/modules/cloud_functions/function_export/requirements.txt
+
+test:
+	pytest tests

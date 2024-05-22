@@ -1,7 +1,7 @@
-from google.cloud import storage, functions_v1, pubsub_v1
 import base64
 import json
-import os
+
+from logging_to_tf import LoggingToTfFactory
 
 
 def generate_terraform_file(event, context):
@@ -13,111 +13,19 @@ def generate_terraform_file(event, context):
     if 'data' in event:
         resource_data = get_json_message(event)
 
-        resource_type = get_resource_type(resource_data)
-        resource_name = get_resource_name(resource_data)
+        logging_to_tf = LoggingToTfFactory()
+        logging_to_tf.set_resource_data(resource_data)
+        logging_to_tf.set_resource_type()
+        logging_to_tf.set_resource_fullname()
 
-        if resource_type == 'gcs_bucket':
-            bucket_name, bucket_details = describe_bucket(resource_name)
-            create_bucket_tf(bucket_name, bucket_details, resource_type)
-        elif resource_type == 'cloud_function':
-            function_name, function_details = describe_function(resource_name)
-            create_function_tf(function_name, function_details, resource_type)
-        elif resource_type == 'pubsub_topic':
-            topic_name, topic_details = describe_pubsub_topic(resource_name)
-            create_pubsub_topic_tf(topic_name, topic_details, resource_type)
-        else:
-            print(f"Unsupported resource type: {resource_type}")
+        resource_instance = logging_to_tf.get_instance()
+        resource_name, resource_details = resource_instance.describe()
+        resource_instance.set_details(resource_details)
+        resource_instance.set_name(resource_name)
+        resource_instance.create_tf_file()
 
 
 def get_json_message(event):
         message = base64.b64decode(event['data']).decode('utf-8')
         json_message = json.loads(message)
         return json_message
-
-
-def get_resource_type(json_message):
-    return json_message.get('resource').get('type')
-
-
-def get_resource_name(json_message):
-    return json_message.get('protoPayload').get('resourceName')
-
-
-def describe_bucket(resource_name):
-    """Retrieve details about a GCS bucket using the Google Cloud Storage Client."""
-    storage_client = storage.Client()
-    bucket_name = resource_name.split('/')[-1]
-    bucket = storage_client.get_bucket(bucket_name)
-    return bucket_name, bucket
-
-
-def describe_function(resource_name):
-    """Retrieve details about a Google Cloud Function using the Cloud Functions Client."""
-    functions_client = functions_v1.CloudFunctionsServiceClient()
-    function_name = resource_name.split('/')[-1]
-    function = functions_client.get_function(name=resource_name)
-    return function_name, function
-
-
-def describe_pubsub_topic(resource_name):
-    """Retrieve details about a Pub/Sub topic using the resource name from protoPayload."""
-    publisher = pubsub_v1.PublisherClient()
-    topic = publisher.get_topic(topic=resource_name)
-    parts = resource_name.split('/')
-    topic_name = parts[3]
-    return topic_name, topic
-
-
-def create_bucket_tf(name, properties, resource_type):
-    try:
-        file_content = f"""
-resource "google_storage_bucket" "{name}" {{
-  name          = "{properties.name}"
-  location      = "{properties.location}"
-  force_destroy = true
-  storage_class = "{properties.storage_class}"
-}}
-"""
-        write_tf_file(name, resource_type, file_content)
-    except Exception as e:
-        print(f"Error creating bucket: {e}")
-
-
-def create_function_tf(name, properties, resource_type):
-    try:
-        file_content = f"""
-resource "google_cloudfunctions_function" "{name}" {{
-  name        = "{properties.name}"
-  description = "{properties.description}"
-  runtime     = "{properties.runtime}"
-  entry_point = "{properties.entry_point}"
-
-  trigger_http = {'true' if properties.https_trigger else 'false'}
-  available_memory_mb = {properties.available_memory_mb}
-}}
-"""
-        write_tf_file(name, resource_type, file_content)
-    except Exception as e:
-        print(f"Error creating bucket: {e}")
-
-
-def create_pubsub_topic_tf(name, properties, resource_type):
-    try:
-        file_content = f"""
-resource "google_pubsub_topic" "{name}" {{
-  name = "{properties.name}"
-}}
-"""
-        write_tf_file(name, resource_type, file_content)
-    except Exception as e:
-        print(f"Error creating Pub/Sub topic Terraform file: {e}")
-
-
-def write_tf_file(name, resource, content):
-    output_bucket = os.getenv('OUTPUT_BUCKET')
-    file_path = f"records/{resource}/{name}.tf"
-    client = storage.Client()
-    bucket = client.bucket(output_bucket)
-    blob = bucket.blob(file_path)
-    blob.upload_from_string(content)
-    print(f"File written: {file_path}")

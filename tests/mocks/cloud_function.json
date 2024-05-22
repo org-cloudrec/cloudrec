@@ -1,28 +1,75 @@
 {
-  "insertId": "-iv2sqhd1zlk",
-  "logName": "projects/prj-thalesgibbon-56789/logs/cloudaudit.googleapis.com%2Factivity",
-  "operation": {
-    "id": "operations/cHJqLXRoYWxlc2dpYmJvbi01Njc4OS91cy1jZW50cmFsMS9jbG91ZHJlYy1mdW5jdGlvbi1leHBvcnQtbG9nZ2luZy85cGdSZGFDUFVUNA",
-    "last": true,
-    "producer": "cloudfunctions.googleapis.com"
-  },
   "protoPayload": {
     "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
-    "authenticationInfo": {},
-    "methodName": "google.cloud.functions.v1.CloudFunctionsService.CreateFunction",
-    "resourceName": "projects/prj-thalesgibbon-56789/locations/us-central1/functions/cloudrec-function-export-logging",
-    "serviceName": "cloudfunctions.googleapis.com",
-    "status": {}
-  },
-  "receiveTimestamp": "2024-05-17T05:29:45.492852895Z",
-  "resource": {
-    "labels": {
-      "function_name": "cloudrec-function-export-logging",
-      "project_id": "prj-thalesgibbon-56789",
-      "region": "us-central1"
+    "authenticationInfo": {
+      "principalEmail": "hi@thalesgibbon.com"
     },
-    "type": "cloud_function"
+    "requestMetadata": {
+      "callerIp": "2804:1b3:a581:1bf4:9045:c29d:896b:ce14",
+      "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+      "requestAttributes": {
+        "time": "2024-05-22T02:22:08.456773Z",
+        "reason": "8uSywAYQGg5Db2xpc2V1bSBGbG93cw",
+        "auth": {}
+      },
+      "destinationAttributes": {}
+    },
+    "serviceName": "cloudfunctions.googleapis.com",
+    "methodName": "google.cloud.functions.v1.CloudFunctionsService.CreateFunction",
+    "authorizationInfo": [
+      {
+        "resource": "projects/prj-thalesgibbon-56789/locations/us-central1/functions/test-cloudrec-1234567890",
+        "permission": "cloudfunctions.functions.create",
+        "granted": true,
+        "resourceAttributes": {},
+        "permissionType": "ADMIN_WRITE"
+      }
+    ],
+    "resourceName": "projects/prj-thalesgibbon-56789/locations/us-central1/functions/test-cloudrec-1234567890",
+    "request": {
+      "@type": "type.googleapis.com/google.cloud.functions.v1.CreateFunctionRequest",
+      "location": "projects/prj-thalesgibbon-56789/locations/us-central1",
+      "function": {
+        "name": "projects/prj-thalesgibbon-56789/locations/us-central1/functions/test-cloudrec-1234567890",
+        "httpsTrigger": {
+          "securityLevel": "SECURE_ALWAYS"
+        },
+        "entryPoint": "helloWorld",
+        "timeout": "60s",
+        "availableMemoryMb": 256,
+        "serviceAccountEmail": "prj-thalesgibbon-56789@appspot.gserviceaccount.com",
+        "labels": {
+          "deployment-tool": "console-cloud"
+        },
+        "sourceUploadUrl": "https://storage.googleapis.com/uploads-8507757944.us-central1.cloudfunctions.appspot.com/25d78ed0-3ec6-4063-82b6-fd9f005dc8b9.zip?GoogleAccessId=service-926978374809@gcf-admin-robot.iam.gserviceaccount.com&Expires=1716346325&Signature=DlaOYqaNr8IuK3dI8nrhF5xFcRSTVFAdlUgzk%2B2xWhJIal8qzJWg%2FoNNwCHI70R0o4t9La46IMAbxxgAEwZkm1CZUHzXHj9GZ8J4IVAvzAhR7aqFxH92kbCJvJGeQuBzJLbqMVUbdsKoxxtBQIufLb919uEQvIY8ij9Bsow4I9%2B7YQCrBWs9h6GJU0DFcZBNRk3%2FsF1I5%2FAxA8RFA96kPIjQKQZAKmsH3OZHCHIFTuuBOzIZQlqXPMacjjNlh8EjoS3n2bndUM%2BUQhMar46ZZ4r9FLJOEwc7WX1FQIW10G5FfgsJ65tzhBY5jMHy2sKHY5xY6skSe%2FI2DXpEV%2Ba8aA%3D%3D",
+        "runtime": "nodejs20",
+        "maxInstances": 3000,
+        "ingressSettings": "ALLOW_ALL",
+        "dockerRegistry": "ARTIFACT_REGISTRY"
+      }
+    },
+    "resourceLocation": {
+      "currentLocations": [
+        "us-central1"
+      ]
+    }
   },
+  "insertId": "1pvklmld59ab",
+  "resource": {
+    "type": "cloud_function",
+    "labels": {
+      "region": "us-central1",
+      "function_name": "test-cloudrec-1234567890",
+      "project_id": "prj-thalesgibbon-56789"
+    }
+  },
+  "timestamp": "2024-05-22T02:22:06.046481Z",
   "severity": "NOTICE",
-  "timestamp": "2024-05-17T05:29:45.132985Z"
+  "logName": "projects/prj-thalesgibbon-56789/logs/cloudaudit.googleapis.com%2Factivity",
+  "operation": {
+    "id": "operations/cHJqLXRoYWxlc2dpYmJvbi01Njc4OS91cy1jZW50cmFsMS90ZXN0LWNsb3VkcmVjLTEyMzQ1Njc4OTAvQ1lFcFh6TkhCTWs",
+    "producer": "cloudfunctions.googleapis.com",
+    "first": true
+  },
+  "receiveTimestamp": "2024-05-22T02:22:08.633907909Z"
 }

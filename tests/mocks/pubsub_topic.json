@@ -1,0 +1,51 @@
+{
+  "protoPayload": {
+    "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+    "authenticationInfo": {
+      "principalEmail": "hi@thalesgibbon.com",
+      "principalSubject": "user:hi@thalesgibbon.com"
+    },
+    "requestMetadata": {
+      "callerIp": "2804:1b3:a581:1bf4:9045:c29d:896b:ce14",
+      "callerSuppliedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36,gzip(gfe)",
+      "requestAttributes": {
+        "time": "2024-05-22T02:36:10.243968829Z",
+        "auth": {}
+      },
+      "destinationAttributes": {}
+    },
+    "serviceName": "pubsub.googleapis.com",
+    "methodName": "google.pubsub.v1.Publisher.CreateTopic",
+    "authorizationInfo": [
+      {
+        "resource": "projects/prj-thalesgibbon-56789",
+        "permission": "pubsub.topics.create",
+        "granted": true,
+        "resourceAttributes": {},
+        "permissionType": "ADMIN_WRITE"
+      }
+    ],
+    "resourceName": "projects/prj-thalesgibbon-56789/topics/test-cloudrec-1234567890",
+    "request": {
+      "kmsKeyName": "",
+      "@type": "type.googleapis.com/google.pubsub.v1.Topic",
+      "name": "projects/prj-thalesgibbon-56789/topics/test-cloudrec-1234567890"
+    },
+    "response": {
+      "name": "projects/prj-thalesgibbon-56789/topics/test-cloudrec-1234567890",
+      "@type": "type.googleapis.com/google.pubsub.v1.Topic"
+    }
+  },
+  "insertId": "11qm1ptd2gj3",
+  "resource": {
+    "type": "pubsub_topic",
+    "labels": {
+      "topic_id": "projects/prj-thalesgibbon-56789/topics/test-cloudrec-1234567890",
+      "project_id": "prj-thalesgibbon-56789"
+    }
+  },
+  "timestamp": "2024-05-22T02:36:10.235838278Z",
+  "severity": "NOTICE",
+  "logName": "projects/prj-thalesgibbon-56789/logs/cloudaudit.googleapis.com%2Factivity",
+  "receiveTimestamp": "2024-05-22T02:36:20.156677224Z"
+}
